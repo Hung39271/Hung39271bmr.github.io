@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMR 計算器</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('form').submit(function(event) {
+        event.preventDefault();
+        var weight = parseFloat($('#weight').val());
+        var height = parseFloat($('#height').val());
+        var age = parseInt($('#age').val());
+        var gender = $('input[name=gender]:checked').val();
+
+        var bmr;
+        if (gender === 'male') {
+          bmr = 66 + (13.7 * weight) + (5 * height) - (6.8 * age);
+        } else if (gender === 'female') {
+          bmr = 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age);
+        }
+
+        $('#result').text('你的 BMR：' + bmr.toFixed(2));
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>BMR 計算器</h1>
+  <form>
+    <label for="weight">體重（公斤）：</label>
+    <input type="number" id="weight" required><br>
+    <label for="height">身高（公分）：</label>
+    <input type="number" id="height" required><br>
+    <label for="age">年齡：</label>
+    <input type="number" id="age" required><br>
+    <label for="gender">性別：</label>
+    <input type="radio" name="gender" value="male" checked> 男性
+    <input type="radio" name="gender" value="female"> 女性<br>
+    <input type="submit" value="計算 BMR">
+  </form>
+
+  <!-- 顯示計算結果 -->
+  <div id="result"></div>
+</body>
+</html>
